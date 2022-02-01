@@ -1,0 +1,29 @@
+
+.back {
+	display: flex; 
+	flex-wrap: wrap; 
+	justify-content: flex-end; 
+	align-items: center; 
+	padding: 10px 0px; 
+	width: 800px; 
+	margin: 0 auto; 
+	padding: 10px; 
+	background-image: url('./res/back.jpg');
+	background-size:cover;
+	background-repeat: no-repeat;
+	backdrop-filter: blur(3px);
+}
+
+.center-div {
+	width: 800px;
+	height: 100%; 
+	margin: 0 auto; 
+	padding: 10px 10px;
+	background-color: white;
+}
+
+.main-table {
+	caption-side: bottom; 
+	border-collapse: collapse; 
+	width: 100%;
+}
