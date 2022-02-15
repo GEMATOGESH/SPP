@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task</title>
+  	<meta charset="utf-8"/>
+  	<link rel="stylesheet" href="styles.css">
+</head>
+<body class = "back">
+	<div class = "center-add"> 
+		<h1 align="center">New task</h1>
+  		<div class = "add">
+			<form action="/add" method = "POST" enctype="multipart/form-data">
+	  			<div class = "form">
+					<label class = "add" for = "tbDate">Date:</label><br>
+					<input type = "date" id = "tbDate" name = "tbDate">
+	  			</div>
+	  			<div class = "form">
+					<label class = "add" for = "tbTime">Time:</label><br>
+					<input type = "time" id = "tbTime" name = "tbTime">
+	  			</div>
+				<label class = "add" for = "tbTask">Task:</label>
+				<textarea class = "add" name = "tbTask" cols = "40" rows = "5"></textarea>
+	    		<input class = "font" type = "file" name = "btnFile"/>
+				<input class = "font" type = "submit" value = "Add"/>
+			</form>
+			<form class = "btn" action = "/" method = "GET">
+		    	<input class = "font" type = "submit" value = "Cancel"/>
+			</form>
+		</div>
+	</div>	
+</body>
+<html>

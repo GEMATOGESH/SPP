@@ -1,29 +1,88 @@
 
 .back {
-	display: flex; 
-	flex-wrap: wrap; 
-	justify-content: flex-end; 
-	align-items: center; 
-	padding: 10px 0px; 
-	width: 800px; 
-	margin: 0 auto; 
-	padding: 10px; 
 	background-image: url('./res/back.jpg');
 	background-size:cover;
 	background-repeat: no-repeat;
 	backdrop-filter: blur(3px);
+	font: 1.2em "Fira Sans", sans-serif;
 }
 
-.center-div {
+div.center-index {
 	width: 800px;
 	height: 100%; 
-	margin: 0 auto; 
+	margin: 100px auto; 
 	padding: 10px 10px;
 	background-color: white;
+	border-radius: 25px;
 }
 
-.main-table {
+div.center-add {
+	width: 500px;
+	height: 100%; 
+	margin: 300px auto; 
+	padding: 10px 10px;
+	background-color: white;
+	border-radius: 25px;
+}
+
+div.form {
+	display: inline-block;
+}
+
+div.add {
+	margin: auto 130px; 
+	align-items: center;
+}
+
+div.equalizer {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.btn {
+	display: inline-block;
+}
+
+div.selecter {
+	padding-left: 350px;
+	display: inline-block;
+}
+
+label.add {
+	float:  left;
+}
+
+table.main {
 	caption-side: bottom; 
 	border-collapse: collapse; 
 	width: 100%;
+}
+
+input.add {
+	width: 215px;
+	height: 100px;
+}
+
+input.font {
+	font: 1.0em "Fira Sans", sans-serif;
+}
+
+select.index {
+	font: 1.0em "Fira Sans", sans-serif;
+}
+
+textarea.add {
+	resize: none;
+	width: 217px;
+}
+
+button.unmarked {
+	background-color: red;
+	color: white;
+}
+
+button.marked {
+	background-color: limegreen;
+	color: white;
 }

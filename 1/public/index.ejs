@@ -6,17 +6,53 @@
   	<link rel="stylesheet" href="styles.css">
 </head>
 <body class = "back">
-	<div class = "center-div"> 
-		<h1 align="center">Your time manager</h1>
-  		<h3>Your plans for future:</h3>
-  		<a href="/23">23?</a>
-  		<table class = "main-table">
+	<div class = "center-index"> 
+		<h1 align = "center">Your time manager</h1>
+		<div class = "equalizer">
+  			<h3>Your plans for future:</h3>
+	  		<form action = "/add" align = "right" method = "GET">
+	    		<input class = "font" type = "submit" value = "Add new task"/>
+			</form>
+		</div>
+		<div class = "selecter" align = "center">
+			<form action="/" method="GET">
+				<select class = "index" name = "filter">
+			    	<option value = "-1" <% if (filter === -1) { %> selected <% } %> >All</option>
+			    	<option value = "0" <% if (filter === 0)  { %> selected <% } %> >Undone</option>
+			    	<option value = "1" <% if (filter === 1)  { %> selected <% } %> >Done</option>
+				</select>
+				<input class = "font" type = "submit" value="OK" />
+			</form>
+		</div>
+  		<table class = "main">
 		    <tr>
 		    	<th>Date</th>
 		    	<th>Time</th>
+		    	<th>Status</th>
 		    	<th>Task</th>
 		    	<th>File</th>
 		    </tr>
+		    <%
+		    	for (let j = 0; j < count; j++) { 
+		    		if (collection[j].status === filter || filter === -1) {
+		    %>
+			    <tr>
+			    	<form action = "/" method = "POST">
+			    		<input type = "hidden" name = "id" value = "<%= collection[j].id %>">
+				    	<th> <%= collection[j].date %> </th> 
+				    	<th> <%= collection[j].time %> </th> 
+			    		<% if (collection[j].status) { %>
+			    			<th> <button class = "marked" type="submit" value="0" name="status">Unmark</button> </th>
+			    		<% } else { %>
+			    			<th> <button class = "unmarked" type="submit" value="1" name="status">Mark</button> </th>
+			    		<% } %>
+			    	</form> 
+			    	<th> <%= collection[j].task %> </th>
+			    	<th> <a href="./files/<%= collection[j].file %>"  download="<%= collection[j].file %>"> <%= collection[j].file %> </a> </th>
+				</tr>
+			<% 
+				} } 
+			%>
 		</table>
 	</div>	
 </body>
