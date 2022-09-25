@@ -1,0 +1,230 @@
+.back {
+	background-image: url('./res/back.jpg');
+	background-size:cover;
+	background-repeat: no-repeat;
+	backdrop-filter: blur(3px);
+	font: 1.2em "Fira Sans", sans-serif;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+div.wrapper {
+	position: relative;
+	margin: 0;
+}
+
+div.a, div.b, div.c, div.d {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
+}
+
+div.center-index {
+	position: absolute;
+	width: 800px;
+	margin: 100px auto; 
+	padding: 10px 10px;
+	background-color: white;
+	border-radius: 25px;
+	visibility: hidden;
+}
+
+div.center-add {
+	width: 500px;
+	margin: 300px auto; 
+	padding: 10px 10px;
+	background-color: white;
+	border-radius: 25px;
+	visibility: hidden;
+}
+
+div.center-auth {
+	width: 500px;
+	margin: 300px auto; 
+	padding: 10px 10px;
+	background-color: white;
+	border-radius: 25px;
+	visibility: visible;
+}
+
+div.add1 {
+	display: grid;
+	grid-template-rows: auto auto;
+}
+
+div.addChild1 {
+	display: inline-grid;
+	grid-template-columns: auto auto auto auto;
+}
+
+div.addChild2 {
+	margin-top: 5px;
+	display: block;
+}
+
+div.authParent {
+	display: inline-grid;
+	grid-template-columns: auto auto;
+	grid-gap: 10px;
+}
+
+div.form {
+	display: inline-block;
+}
+
+div.add {
+	margin: auto 130px;
+}
+
+div.equalizer {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div.btn {
+	display: inline-block;
+}
+
+div.selecter {
+	display: grid;
+	grid-template-columns: 20% 20% 60%;
+}
+
+div.margener {
+	margin-top: 10px;
+}
+
+div.controls {
+	margin-left: auto; 
+	margin-right: 0;
+}
+
+label.add {
+	float:  left;
+}
+
+#tasks {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#tasks td, #tasks th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+tr.undone {
+	background-color: #f2f2f2;
+}
+
+#tasks tr:hover {background-color: #ddd;}
+
+#tasks th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #eb5e34;
+	color: white;
+	text-align: center;
+}
+
+input.add {
+	width: 215px;
+	height: 100px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input.font {
+	font: 1.0em "Fira Sans", sans-serif;
+}
+
+input.auth {
+	height:  30px;
+	width:  200px;
+	margin-top: 10px;
+}
+
+select.index {
+	font: 1.0em "Fira Sans", sans-serif;
+	height: 50%;
+	text-align: center;
+	align-self: center;
+}
+
+textarea.add {
+	resize: none;
+	width: 217px;
+}
+
+button.unmarked {
+	background-color: red;
+	width: 100%;
+	height: 100%;
+}
+
+button.marked {
+	background-color: limegreen;
+	width: 100%;
+	height: 100%;
+	width: 100%;
+	height: 100%;
+}
+
+button.standart {
+	color: white;
+	box-shadow: none;
+	border: 0;
+}
+
+button.newTask {
+	width: 100px;
+	height: 35px;
+	align-self: center;
+	text-align: center;
+	background-color: #eb5e34;
+	justify-self: right;
+}
+
+button.newTask:hover {
+	background-color: darkred;
+}
+
+button.add {
+	margin-top: 10px;
+	background-color: #eb5e34;
+	width: 100px;
+	height: 35px;
+}
+
+button.add:hover {
+	background-color: darkred;
+}
+
+form.btn {
+	margin: 0 auto;
+}
+
+p.selecter {
+	width: auto;
+	text-align: right;
+	margin-right: 20px;
+}
+
+p.add {
+	margin: 5px;
+}
