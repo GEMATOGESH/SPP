@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Task</title>
+  	<meta charset="utf-8"/>
+  	<link rel="stylesheet" href="styles.css">
+</head>
+<body class = "back">
+	<div class="wrapper">
+		<div class="a">
+			<div id = "maindiv" class = "center-index"> 
+				<h1 align = "center">Your time manager</h1>
+				<div class = "selecter">
+					<p class = "selecter"> Filter by status: </p>
+					<select class = "index" id = "filter" onchange="GetTasks()">
+				    	<option value = "-1" selected>All</option>
+				    	<option value = "0"> Undone</option>
+				    	<option value = "1">Done</option>
+					</select>
+					<button class = "standart | newTask" onclick="addTaskVis()"> Add new task </button>
+				</div>
+		  		<table id = "tasks">
+				    <tr>
+				    	<th>Date</th>
+				    	<th>Time</th>
+				    	<th>Status</th>
+				    	<th>Task</th>
+				    	<th>File</th>
+				    </tr>
+				    <tbody class="info"></tbody>
+				</table>
+			</div>	
+		</div>
+		<div class="b">
+			<div id = "adddiv" class = "center-add">
+				<h1> Add new task </h1>
+				<div class="add1">
+					<div class="addChild1">
+						<label class = "add" for = "tbDate">Date:</label>
+						<input type = "date" id = "tbDate">
+						<label class = "add" for = "tbTime">Time:</label>
+						<input type = "time" id = "tbTime">
+					</div>
+					<div class="addChild2">
+						<p class="add">Task:</p>
+						<textarea class = "add" id = "tbTask" cols = "40" rows = "5"></textarea>
+			    		<input class = "font" type = "file" id = "btnFile" />
+		    		</div>
+	    		</div>
+				<button class="standart | add" onclick="addTask()"> Add new task </button>
+		    	<button class="standart | add" onclick="mainVis()"> Return </button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	async function GetTasks() {
+	    const response = await fetch("/tasks", {
+	        method: "GET",
+	        headers: { "Accept": "application/json" }
+		    });
+	    if (response.ok === true) {
+	        tasks = await response.json();
+	        let rows = document.querySelector(".info"); 
+	        rows.innerHTML = '';
+
+	        var select = document.getElementById('filter');
+			var value = select.options[select.selectedIndex].value;
+
+	        tasks.forEach(task => {
+	        	if (value == task.status || value == -1)
+	        	{
+	            	rows.append(row(task));
+	        	}
+	        });
+	    }
+	}
+
+	function row(task) {
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-rowid", task.id);
+    	tr.className = "tasks";
+
+        const dateTd = document.createElement("td");
+        dateTd.setAttribute('style','text-align :center;');
+        dateTd.append(task.date);
+        tr.append(dateTd);
+
+        const timeTd = document.createElement("td");
+        timeTd.setAttribute('style','text-align :center;');
+        timeTd.append(task.time);
+        tr.append(timeTd);
+
+        const statusTd = document.createElement("td");
+        statusTd.setAttribute('style','text-align :center;');
+        const btn = document.createElement("button");
+        if (task.status)
+        {
+        	btn.className = "standart | marked";
+			btn.textContent = "Unmark";
+        }
+        else
+        {
+        	btn.className = "standart | unmarked";
+			btn.textContent = "Mark";
+			tr.className = "undone";
+        }
+		btn.value = task.status;
+        btn.name = "status";
+		btn.type = "submit";
+        btn.addEventListener("click", e => {
+            e.preventDefault();
+        	id = task.id;
+	        if (task.status)
+	        {
+	        	btn.className = "standart | unmarked";
+				btn.textContent = "Mark";
+				task.status = 0;
+				markTask(task.id, 0);
+				tr.className = "undone";
+	        }
+	        else
+	        {
+	        	btn.className = "standart | marked";
+				btn.textContent = "Unmark";
+				task.status = 1;
+				markTask(task.id, 1);
+				tr.className = "";
+	        }
+        });
+		statusTd.append(btn);
+        tr.append(statusTd);
+
+        const taskTd = document.createElement("td");
+        taskTd.setAttribute('style','text-align :center;');
+        taskTd.append(task.task);
+        tr.append(taskTd);
+
+        const fileTd = document.createElement("td");
+        fileTd.setAttribute('style','text-align :center;');
+        const dwnldLink = document.createElement("a");
+        dwnldLink.setAttribute('href','./files/' + task.file);
+        dwnldLink.setAttribute('download', task.file);
+        dwnldLink.append(task.file);
+        fileTd.append(dwnldLink);
+        tr.append(fileTd);
+
+        return tr;
+    }
+
+    async function markTask(id, status)
+    {
+		const response = await fetch("/tasks", {
+            method: "POST",
+            headers: { "Accept": "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: id,
+                status: status
+            })
+    	});
+    	console.log(response);
+    }
+
+    function addTaskVis() 
+    {
+    	var select = document.getElementById('maindiv').style.visibility = "hidden";
+    	select = document.getElementById('adddiv').style.visibility = "visible";
+    }
+
+    function mainVis() 
+    {
+    	var select = document.getElementById('adddiv').style.visibility = "hidden";
+    	select = document.getElementById('maindiv').style.visibility = "visible";
+    }
+
+    async function addTask() 
+    {
+  		const formData  = new FormData();
+    	date = document.getElementById('tbDate');
+    	formData.append("date", date.value);
+    	time = document.getElementById('tbTime');
+    	formData.append("time", time.value);
+    	task = document.getElementById('tbTask');
+    	formData.append("task", task.value);
+    	
+    	file = document.getElementById('btnFile').files[0];
+    	formData.append("file", file);
+
+    	const response = await fetch("/newtask", {
+            method: "POST",
+            body: formData
+    	});
+
+    	console.log(response);
+
+    	GetTasks();
+    	mainVis();
+    }
+
+	GetTasks();
+	</script>
+
+</body>
+<html>
